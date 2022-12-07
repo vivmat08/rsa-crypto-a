@@ -1,0 +1,2 @@
+Total score of Player 1 after turn 1 is :  8 
+Total score of Player 2 after turn 2 is :  4
