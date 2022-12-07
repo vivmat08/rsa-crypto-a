@@ -1,6 +1,7 @@
 import MontgomeryReduction
 from random import randrange
-from timeit import default_timer as timer
+# from timeit import default_timer as timer
+from time import time
 from RabinMiller import generate_prime_number
 from datetime import timedelta
 
@@ -19,16 +20,15 @@ def SQMUL(base, power, modulo):
 
 
 
-def generate_randoms(default = 1000):
+def generate_randoms(default = 10000):
     randoms = []
-    for i in range(default):
-        randoms.append(randrange(10**500, 10**502))
+    for _ in range(default):
+        randoms.append(randrange(10**308, 10**309))
 
     return randoms
 
 
-def multipleMontgomery(randoms, n):
-    mr = MontgomeryReduction.MontgomeryReducer(n)
+def multipleMontgomery(mr, randoms):
     for num in randoms:
         cval = mr.convert_in(num)
         m = mr.convert_out(mr.pow(cval,65537))
@@ -48,24 +48,25 @@ def main():
 
     array = generate_randoms()
 
-    p = generate_prime_number(1024)
-    q = generate_prime_number(1024)
+    p = generate_prime_number(512)
+    q = generate_prime_number(512)
     n = p * q
     
-    start = timer()
-    multipleMontgomery(array, n)
-    end = timer()
+    mr = MontgomeryReduction.MontgomeryReducer(n)
+    start = time()
+    multipleMontgomery(mr, array)
+    end = time()
     print((end - start))
 
-    start = timer()
+    start = time()
     multipleSQMUL(array, n)
-    end = timer()
+    end = time()
     print((end - start))
 
 
-    start = timer()
+    start = time()
     multiplePow(array, n)
-    end = timer()
+    end = time()
     print((end - start))
 
 
