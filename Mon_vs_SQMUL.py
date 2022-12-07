@@ -38,11 +38,6 @@ def multipleSQMUL(randoms, n):
     for num in randoms:
         m = SQMUL(num, 65537, n)
 
-def multiplePow(randoms, n):
-
-    for num in randoms:
-        m = pow(num, 65537, n)
-
 
 def main():
 
@@ -60,12 +55,6 @@ def main():
 
     start = time()
     multipleSQMUL(array, n)
-    end = time()
-    print((end - start))
-
-
-    start = time()
-    multiplePow(array, n)
     end = time()
     print((end - start))
 
